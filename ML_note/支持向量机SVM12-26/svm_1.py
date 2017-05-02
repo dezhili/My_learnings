@@ -1,0 +1,66 @@
+##from sklearn import svm
+##
+##x=[[2,0],[1,1],[2,3]]
+##y=[0,0,1]
+##
+##clf = svm.SVC(kernel ='linear')
+##clf.fit(x,y)
+##
+##print(clf)
+##
+###get support vectors
+##print(clf.support_vectors_)
+##
+###get indices of support vectors
+##print(clf.support_)
+##
+###get number of support vectors for each class
+##print(clf.n_support_)
+##
+##
+##
+##print(clf.predict([1,2]))
+
+print(__doc__)
+
+import numpy as np
+import pylab as pl
+from sklearn import svm
+
+#create 40 seperable points
+np.random.seed(0)
+X=np.r_[np.random.randn(20,2)-[2,2], np.random.randn(20,2)+[2,2]]
+Y=[0]*20 + [1]*20
+
+#fit the model
+clf = svm.SVC(kernel='linear')
+clf.fit(X,Y)
+
+#get the seperating hyperplane
+w = clf.coef_[0]
+a = -w[0]/w[1]
+xx = np.linspace(-5,5)
+yy = a * xx - (clf.intercept_[0])/ w[1]
+
+#plot the parallels in the seperating hyperplain that pass through support vectors
+b = clf.support_vectors_[0]
+yy_down = a *xx +(b[1] - a*b[0])
+b = clf.support_vectors_[-1]
+yy_up = a* xx +(b[1] - a*b[0])
+
+print("w:", w)
+print("a:", a)
+print("support_vectors_:", clf.support_vectors_)
+print("clf.coef_:", clf.coef_)
+#print(clf.predict([1,2]))
+
+
+pl.plot(xx,yy,"k--")
+pl.plot(xx,yy_down,"k--")
+pl.plot(xx,yy_up,"k--")
+
+pl.scatter(clf.support_vectors_[:,0],clf.support_vectors_[:,1],
+           s=80,facecolors="none")
+pl.scatter(X[:,0],X[:,1],c=Y,cmap=pl.cm.Paired)
+pl.axis('tight')
+pl.show()
