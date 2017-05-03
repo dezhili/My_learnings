@@ -1,5 +1,5 @@
 # python
-[python小笔记](https://github.com/dezhili/markdown01/blob/master/file01/note.py)
+[python小笔记](https://github.com/dezhili/My_learnings/blob/master/python_note/note.py)
 
 # tensorflow
 machine learning,  **deep learning!**
