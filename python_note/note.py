@@ -917,6 +917,9 @@ for each in fibs:
 	print(each)
 # fibs = Fibs(100)
 # for each in fibs:
-# 	print(each)
+# 	print(each)  
 
+
+
+# 生成器
 
