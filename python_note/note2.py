@@ -247,36 +247,138 @@ print(sum(i for i in range(100) if i % 2))
 
 #  正则表达式
 import re
-a = re.search(r'FishC', "I love FishC.com") #search()在字符串中搜索正则表达式第一次出现的位置
-print(a)  #<_sre.SRE_Match object; span=(7, 12), match='FishC'>
-b = re.search(r'.', 'I love Fishc.com') # .通配符 匹配除换行之外的所有字符
-print(b)  #<_sre.SRE_Match object; span=(0, 1), match='I'>
-c = re.search(r'Fish.', 'I love Fishc.com')
-print(c)
-d = re.search(r'\.', 'I love Fishc.com') # 匹配 . 本身
-print(d)
+# a = re.search(r'FishC', "I love FishC.com") #search()在字符串中搜索正则表达式第一次出现的位置
+# print(a)  #<_sre.SRE_Match object; span=(7, 12), match='FishC'>
+# b = re.search(r'.', 'I love Fishc.com') # .通配符 匹配除换行之外的所有字符
+# print(b)  #<_sre.SRE_Match object; span=(0, 1), match='I'>
+# c = re.search(r'Fish.', 'I love Fishc.com')
+# print(c)
+# d = re.search(r'\.', 'I love Fishc.com') # 匹配 . 本身
+# print(d)
 
-e = re.search(r'\d', 'I love 123 FishC.com') # \d 匹配任何数字
-print(e)
-f = re.search(r'\d\d\d', 'I love 123 FishC.com') # \d 匹配任何数字
-print(f)
-g = re.search(r'\d\d\d\.\d\d\d\.\d\d\d\.\d\d\d', '192.168.168.1')
-print(g)
+# e = re.search(r'\d', 'I love 123 FishC.com') # \d 匹配任何数字
+# print(e)
+# f = re.search(r'\d\d\d', 'I love 123 FishC.com') # \d 匹配任何数字
+# print(f)
+# g = re.search(r'\d\d\d\.\d\d\d\.\d\d\d\.\d\d\d', '192.168.168.1')
+# print(g)
 
-h = re.search(r'[aeiou]', 'I love FishC.com') #加[]为字符类  ， 匹配
-print(h)
-j = re.search(r'[a-z]', 'I love FishC.com')
-print(j)
+# h = re.search(r'[aeiou]', 'I love FishC.com') #加[]为字符类  ， 匹配
+# print(h)
+# j = re.search(r'[a-z]', 'I love FishC.com')
+# print(j)
 
-k = re.search(r'ab{3}c', 'abbbc')			#限定重复匹配的次数{}
-print(k)										
-l = re.search(r'ab{3,10}c', 'abbbbbc')  
-print(l)
+# k = re.search(r'(ab){3}c', 'abababc')			#限定重复匹配的次数{}
+# print(k)										
+# l = re.search(r'ab{3,10}c', 'abbbbbc')  
+# print(l)
 
-m = re.search(r'[01]\d\d|2[0-4]\d|25[0-5]', '188')  	#匹配0-255  逻辑或
-print(m)
+# m = re.search(r'[01]\d\d|2[0-4]\d|25[0-5]', '188')  	#匹配0-255  逻辑或
+# print(m)
 
-#匹配ip地址 , 192.168.001.001
-n = re.search(r'(([01]{0,1}\d{0,1}\d|2[0-4]\d|25[0-5])\.){3}([01]{0,1}\d{0,1}\d|2[0-4]\d|25[0-5])','192.168.1.1')   
-print(n) 
-   
+# #匹配ip地址 , 192.168.001.001
+# n = re.search(r'(([01]{0,1}\d{0,1}\d|2[0-4]\d|25[0-5])\.){3}([01]{0,1}\d{0,1}\d|2[0-4]\d|25[0-5])','192.168.1.1')   
+# print(n) 
+
+
+#  元字符('.','|','^','$','\','[...],'{M,N}','*','+','?')  特殊字符
+r1 = re.search(r'Fish(C|D)', 'i love FishC.com')  #管道符 "|"
+print(r1)
+r2 = re.search(r'^Fishc', 'Fishc.com') #脱字符
+print(r2)
+r3 = re.search(r'Fishc$', 'i Love Fishc')
+print(r3)
+r4 = re.search(r'(Fish)\1', 'FishFish') #(Fish)\1 == FishFish ()代表子组
+print(r4)
+r5 = re.search(r'[.]', 'Fishc.com') #[.]转义 将字符集里的东西当成普通的字符
+print(r5)
+r6 = re.findall(r'[a-z]','Fishc.com')
+print(r6)
+r7 = re.findall(r'[\n]', 'Fishc.com\n')
+print(r7)
+r8 = re.findall(r'[^a-z]','Fishc.com')
+print(r8)								# ['F', '.'],取反
+r9 = re.search(r'Fishc{3}', 'Fishccccc')
+print(r9)
+
+#  贪婪模式
+s = "<html><title>I love Fishc.com</title></html>"
+r10 = re.search(r'<.+>', s)
+print(r10)               # match='<html><title>I love Fishc.com</title></html>'
+r11 = re.search(r'<.+?>', s)  # 启用非贪婪模式(将?放在表示重复的后面 转换成费贪婪模式)
+print(r11)  			# match='<html>'>
+
+# 特殊字符 (\加) ('\序号')(\A)(\Z)(\b)(\B)(\d)(\D)(\s)(\w)(\W)
+
+
+# 编译正则表达式 编译标志
+# 如果需要重复的使用某个正则表达式，那么可以将该正则表达式编译成模式对象(re.compile())
+# p = re.compile(r'[A-Z]')
+# print(type(p))
+# print(p.search('I Love Fishc.com'))
+# print(p.findall('I Love Fishc.com'))
+
+# result = re.search(r' (\w+) (\w+)', 'I Love Fishc.com') #返回一个匹配对象
+# print(result)
+# print(result.group())  #   Love Fishc
+# print(result.group(1)) #   Love
+# print(result.start())
+# print(result.end())
+# print(result.span())
+
+
+# 下载图片
+import urllib.request
+import re
+import os
+
+# def url_open(url):
+# 	req = urllib.request.Request(url)
+# 	req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36')
+# 	response = urllib.request.urlopen(req)
+# 	html = response.read().decode('utf-8')
+# 	return html
+
+# def get_img(html, folder='OOXX3'):
+# 	os.mkdir(folder)
+# 	os.chdir(folder)
+
+# 	# p = r'<img class="BDE_Image" src="[^"]+\.jpg"'
+# 	p = r'<img class="BDE_Image" src="([^"]+\.jpg)"'#(加个子组，findall会返回子组匹配的东西)
+# 	img_list = re.findall(p, html)  
+# 	# <img class="BDE_Image" src="https://imgsa.baidu.com/forum/w%3D580/sign=0ee5c39a5cfbb2fb342b581a7f4b2043/7a391dd5ad6eddc406d17f3c30dbb6fd53663314.jpg"
+
+# 	# 要获取https://imgsa.baidu.com/forum/w%3D580/sign=0ee5c39a5cfbb2fb342b581a7f4b2043/7a391dd5ad6eddc406d17f3c30dbb6fd53663314.jpg
+	
+# 	for each in img_list:
+# 		print(each)
+# 		filename = each.split('/')[-1]
+# 		urllib.request.urlretrieve(each, filename, None) #下载到文件夹中
+		
+# if __name__ == '__main__':
+# 	url = "https://tieba.baidu.com/p/5064226962"
+# 	get_img(url_open(url))
+
+# get ip
+def url_open(url):
+	req = urllib.request.Request(url)
+	req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36')
+	response = urllib.request.urlopen(req)
+	html = response.read().decode('utf-8')
+	return html
+
+def get_ip(html):
+
+	p = r'(?:(?:[0,1]?\d?\d|2[0-4]\d|25[0-5])\.){3}(?:[0,1]?\d?\d|2[0-4]\d|25[0-5])'
+	ip_list = re.findall(p, html)  #这边使用了3个子组,分类 元组 让子组变非捕获组
+		
+	for each in ip_list:
+		print(each)
+		
+		
+if __name__ == '__main__':
+	url = "http://www.xicidaili.com/"
+	get_ip(url_open(url))
+
+
+#  访问网页的异常处理
