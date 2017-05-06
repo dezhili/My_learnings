@@ -328,9 +328,9 @@ print(r11)  			# match='<html>'>
 
 
 # 下载图片
-import urllib.request
-import re
-import os
+# import urllib.request
+# import re
+# import os
 
 # def url_open(url):
 # 	req = urllib.request.Request(url)
@@ -359,26 +359,56 @@ import os
 # 	url = "https://tieba.baidu.com/p/5064226962"
 # 	get_img(url_open(url))
 
+
+
 # get ip
-def url_open(url):
-	req = urllib.request.Request(url)
-	req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36')
-	response = urllib.request.urlopen(req)
-	html = response.read().decode('utf-8')
-	return html
+# def url_open(url):
+# 	req = urllib.request.Request(url)
+# 	req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.101 Safari/537.36')
+# 	response = urllib.request.urlopen(req)
+# 	html = response.read().decode('utf-8')
+# 	return html
 
-def get_ip(html):
+# def get_ip(html):
 
-	p = r'(?:(?:[0,1]?\d?\d|2[0-4]\d|25[0-5])\.){3}(?:[0,1]?\d?\d|2[0-4]\d|25[0-5])'
-	ip_list = re.findall(p, html)  #这边使用了3个子组,分类 元组 让子组变非捕获组
+# 	p = r'(?:(?:[0,1]?\d?\d|2[0-4]\d|25[0-5])\.){3}(?:[0,1]?\d?\d|2[0-4]\d|25[0-5])'
+# 	ip_list = re.findall(p, html)  #这边使用了3个子组,分类 元组 让子组变非捕获组
 		
-	for each in ip_list:
-		print(each)
+# 	for each in ip_list:
+# 		print(each)
 		
 		
-if __name__ == '__main__':
-	url = "http://www.xicidaili.com/"
-	get_ip(url_open(url))
+# if __name__ == '__main__':
+# 	url = "http://www.xicidaili.com/"
+# 	get_ip(url_open(url))
 
 
-#  访问网页的异常处理
+#  访问网页的异常处理 URLError  HTTPError(状态码 404)
+# import urllib.request
+# import urllib.error
+# req = urllib.request.Request("http://www.ooxx.fishC.com")
+# try:
+#     urllib.request.urlopen(req)
+# except urllib.error.URLError as e:
+#     print(e.reason)
+
+# req = urllib.request.Request("http://www.fishc.com/ooxx.html")
+# try:
+#     urllib.request.urlopen(req)
+# except urllib.error.HTTPError as e:
+#     print("The server couldn\'t fulfill the request")
+#     print("Error code: ",e.code)
+#     print(e.read())
+# except urllib.error.URLError as e:
+#     print("We failed to reach the server")
+#     print("Reason:", e.reason)
+# else:
+
+
+
+#  框架 scrapy 初窥门径 (Scrapy Engine -> Scheduler-调度器 Downloader  Spiders  Item Pipeline)
+# 使用scrapy 抓取一个网站 需要四个步骤:
+# --创建一个Scrapy项目 --定义一个Item容器  --编写爬虫  --存储内容
+
+
+

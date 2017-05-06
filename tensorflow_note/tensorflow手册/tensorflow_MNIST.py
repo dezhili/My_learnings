@@ -12,15 +12,16 @@ from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets('MNIST_data',one_hot=True) 
 
 x = tf.placeholder("float", [None, 784]) # 二维浮点数张量。 [None,784]表示此张量的第一个维度可以是任何长度
+y_ = tf.placeholder("float", [None, 10])  # 正确值
 
 W = tf.Variable(tf.zeros([784, 10]))
 b = tf.Variable(tf.zeros([10]))
 
 y = tf.nn.softmax(tf.matmul(x, W)+b)
 
+
 #  训练模型 loss function - cross-entropy(交叉熵)
-y_ = tf.placeholder("float", [None, 10])  # 正确值
-cross_entropy = -tf.reduce_sum(y_ * tf.log(y))  # (计算一个batch的)
+cross_entropy = -tf.reduce_sum(y_ * tf.log(y))  # (计算整个minibatch的)
 train_step = tf.train.GradientDescentOptimizer(0.01).minimize(cross_entropy)
 
 
@@ -46,6 +47,8 @@ for i in range(1000):
     sess.run(train_step, feed_dict={x:batch_xs, y_:batch_ys})
     if i% 50 ==0 :
         print(compute_accuracy(mnist.test.images, mnist.test.labels))
+
+sess.close()
 
     
     
