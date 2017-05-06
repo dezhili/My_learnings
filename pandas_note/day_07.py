@@ -13,12 +13,12 @@ left1 = pd.DataFrame({'key': ['K0', 'K1', 'K2', 'K3'],
 right1 = pd.DataFrame({'key': ['K0', 'K1', 'K2', 'K3'],
                               'C': ['C0', 'C1', 'C2', 'C3'],
                               'D': ['D0', 'D1', 'D2', 'D3']})
-print(left1)
-print(right1)
+# print(left1)
+# print(right1)
 
 #依据key column合并
 res1 = pd.merge(left1, right1, on='key')
-print(res1)
+# print(res1)
 
 #合并时 how=['left', 'right', 'outer', 'inner'] 预设值how='inner'
 left2 = pd.DataFrame({'key1': ['K0', 'K0', 'K1', 'K2'],
@@ -34,7 +34,7 @@ print(right2)
 
 #  依据key1与key2 columns进行合并，
 #  并打印出四种结果['left', 'right', 'outer', 'inner']
-res2 = pd.merge(left2, right2, on=['key1','key2'], how='inner')
+res2 = pd.merge(left2, right2, on=['key1','key2'], how='left')
 print(res2)
 res3 = pd.merge(left2, right2, on=['key1','key2'], how='outer')
 print(res3)
