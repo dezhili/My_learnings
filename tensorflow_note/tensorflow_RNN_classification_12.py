@@ -3,6 +3,11 @@ from tensorflow.examples.tutorials.mnist import input_data
 
 mnist = input_data.read_data_sets('MNIST_data',one_hot=True)
 
+'''
+MNIST RNN 序列
+28x28 每一行作为一个input(28)
+'''
+
 #hyperparameters
 lr = 0.001
 training_iters = 100000
