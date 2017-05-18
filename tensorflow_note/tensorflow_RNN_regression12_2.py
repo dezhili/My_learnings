@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 BATCH_START = 0
 TIME_STEPS = 20
-BATCH_SIZE = 1
+BATCH_SIZE = 50
 INPUT_SIZE = 1
 OUTPUT_SIZE = 1
 CELL_SIZE = 10
