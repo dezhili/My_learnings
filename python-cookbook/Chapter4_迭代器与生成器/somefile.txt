@@ -1,0 +1,9 @@
+
+#This is a test
+#This is for iterator
+
+Hello world!
+python a magic programming language
+start learning python
+This is a test for studying python
+haha
